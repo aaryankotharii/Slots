@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State  private var symbols = ["apple","donut","lemon"]
-    @State private var num  = [1,0,0]
+    @State private var num  = [1,0,1]
     @State private var credits = 1000
     @State private var betAmount = 5
     var body: some View {
