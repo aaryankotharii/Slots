@@ -9,8 +9,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    private var symbols = ["apple","donut","lemon"]
+    @State private var num  = [1,0,0]
     @State private var credits = 1000
+    @State private var betAmount = 5
     var body: some View {
         ZStack{
             
@@ -43,19 +45,19 @@ struct ContentView: View {
                     .cornerRadius(20)
                 Spacer()
                 HStack{
-                    Image("apple")
+                    Image(symbols[num[0]])
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(20)
 
-                    Image("apple")
+                    Image(symbols[num[1]])
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .background(Color.white.opacity(0.5))
                         .cornerRadius(20)
 
-                    Image("apple")
+                    Image(symbols[num[2]])
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .background(Color.white.opacity(0.5))
@@ -65,7 +67,16 @@ struct ContentView: View {
                 Spacer()
                 
                 Button(action: {
-                    self.credits+=1
+                    self.num[0] = Int.random(in: 0...self.symbols.count-1)
+                    self.num[1] = Int.random(in: 0...self.symbols.count-1)
+                    self.num[2] = Int.random(in: 0...self.symbols.count-1)
+                    //
+                    if self.num[0] == self.num[1] && self.num[1] == self.num[2] {
+                        self.credits += self.betAmount * 10
+                    }
+                    else{
+                        self.credits -= self.betAmount
+                    }
                     }){
                         Text("Spin")
                         .bold()
