@@ -156,7 +156,7 @@ struct ContentView: View {
                 matches += 1
                 self.background[3] = Color.green
                 self.background[4] = Color.green
-                self.background[5] = Color.green
+                self.background[5] = Color.yellow
 
     }
             
