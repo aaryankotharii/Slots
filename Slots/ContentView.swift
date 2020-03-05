@@ -67,7 +67,6 @@ struct ContentView: View {
                 }
                 
                 Spacer()
-                 
                 Button(action: {
                     self.num = self.num.map({ _ in
                         Int.random(in: 0...self.symbols.count-1)
