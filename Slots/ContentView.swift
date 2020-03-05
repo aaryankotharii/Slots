@@ -10,8 +10,9 @@ import SwiftUI
 
 struct ContentView: View {
     @State  private var symbols = ["apple","donut","lemon"]
-    @State private var num  = [0,1,1]
+    @State private var num  = Array(repeating: 0, count: 9)
     @State private var credits = 1000
+    @State private var background = Array(repeating: Color.white, count: 9)
     @State private var betAmount = 5
     var body: some View {
         ZStack{
@@ -44,24 +45,40 @@ struct ContentView: View {
                     .background(Color.white.opacity(0.5))
                     .cornerRadius(20)
                 Spacer()
+                VStack{
                 HStack{
-                    
-                    CardView(symbol: $symbols[num[0]])
-                    CardView(symbol: $symbols[num[1]])
-                    CardView(symbol: $symbols[num[2]])
+                      
+                      CardView(symbol: $symbols[num[0]], background: $background[num[0]])
+                      CardView(symbol: $symbols[num[1]], background: $background[num[1]])
+                      CardView(symbol: $symbols[num[2]], background: $background[num[2]])
+                  }
+                HStack{
+                        
+                        CardView(symbol: $symbols[num[3]], background: $background[num[3]])
+                    CardView(symbol: $symbols[num[4]], background: $background[num[4]])
+                        CardView(symbol: $symbols[num[5]], background: $background[num[5]])
+                    }
+                    HStack{
+                          
+                          CardView(symbol: $symbols[num[6]], background: $background[num[6]])
+                          CardView(symbol: $symbols[num[7]], background: $background[num[7]])
+                          CardView(symbol: $symbols[num[8]], background: $background[num[8]])
+                      }
                 }
                 
                 Spacer()
                  
                 Button(action: {
-                    self.num[0] = Int.random(in: 0...self.symbols.count-1)
-                    self.num[1] = Int.random(in: 0...self.symbols.count-1)
-                    self.num[2] = Int.random(in: 0...self.symbols.count-1)
+                    self.num = self.num.map({ _ in
+                        Int.random(in: 0...self.symbols.count-1)
+                    })
                     //
                     if self.num[0] == self.num[1] && self.num[1] == self.num[2] {
                         self.credits += self.betAmount * 10
+                       // self.background = .green
                     }
                     else{
+                        //self.background = .white
                         self.credits -= self.betAmount
                     }
                     }){
