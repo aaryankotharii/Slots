@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var credits = 1000
     var body: some View {
         ZStack{
             
@@ -33,11 +35,41 @@ struct ContentView: View {
                         .foregroundColor(.yellow)
                 }.scaleEffect(2)
                 
-                Text("Credits 1000")
+                Text("Credits \(credits)")
                     .foregroundColor(.black)
                     .padding(.all,10)
                     .background(Color.white.opacity(0.5))
-                .cornerRadius(20)
+                    .cornerRadius(20)
+                
+                HStack{
+                    Image("apple")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(20)
+
+                    Image("apple")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(20)
+
+                    Image("apple")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .background(Color.white.opacity(0.5))
+                        .cornerRadius(20)
+                }
+                
+                Button(action: {
+                    self.credits+=1
+                    }){
+                        Text("Spin")
+                        .bold()
+                            .foregroundColor(.white)
+                            .padding(.all,10)
+                            .background(Color.pink)
+                }
             }
         }
     }
