@@ -24,6 +24,7 @@ struct ContentView: View {
             .edgesIgnoringSafeArea(.all)
 
             VStack{
+                Spacer()
                 //Title
                 HStack{
                     Image(systemName: "star.fill")
@@ -34,13 +35,13 @@ struct ContentView: View {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
                 }.scaleEffect(2)
-                
+                Spacer()
                 Text("Credits \(credits)")
                     .foregroundColor(.black)
                     .padding(.all,10)
                     .background(Color.white.opacity(0.5))
                     .cornerRadius(20)
-                
+                Spacer()
                 HStack{
                     Image("apple")
                         .resizable()
@@ -61,6 +62,8 @@ struct ContentView: View {
                         .cornerRadius(20)
                 }
                 
+                Spacer()
+                
                 Button(action: {
                     self.credits+=1
                     }){
@@ -68,8 +71,11 @@ struct ContentView: View {
                         .bold()
                             .foregroundColor(.white)
                             .padding(.all,10)
+                            .padding([.leading,.trailing],30)
                             .background(Color.pink)
+                        .cornerRadius(20)
                 }
+                Spacer()
             }
         }
     }
