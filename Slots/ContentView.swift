@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    private var symbols = ["apple","donut","lemon"]
+    @State  private var symbols = ["apple","donut","lemon"]
     @State private var num  = [1,0,0]
     @State private var credits = 1000
     @State private var betAmount = 5
@@ -45,27 +45,14 @@ struct ContentView: View {
                     .cornerRadius(20)
                 Spacer()
                 HStack{
-                    Image(symbols[num[0]])
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .background(Color.white.opacity(0.5))
-                        .cornerRadius(20)
-
-                    Image(symbols[num[1]])
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .background(Color.white.opacity(0.5))
-                        .cornerRadius(20)
-
-                    Image(symbols[num[2]])
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .background(Color.white.opacity(0.5))
-                        .cornerRadius(20)
+                    
+                    CardView(symbol: $symbols[num[0]])
+                    CardView(symbol: $symbols[num[1]])
+                    CardView(symbol: $symbols[num[2]])
                 }
                 
                 Spacer()
-                
+                 
                 Button(action: {
                     self.num[0] = Int.random(in: 0...self.symbols.count-1)
                     self.num[1] = Int.random(in: 0...self.symbols.count-1)
@@ -84,7 +71,7 @@ struct ContentView: View {
                             .padding(.all,10)
                             .padding([.leading,.trailing],30)
                             .background(Color.pink)
-                        .cornerRadius(20)
+                            .cornerRadius(20)
                 }
                 Spacer()
             }
