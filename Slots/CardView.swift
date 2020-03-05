@@ -22,6 +22,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(symbol: Binding.constant("apple"), background: Binding.constant(.white))
+        CardView(symbol: Binding.constant("apple"), background: Binding.constant(Color.white))
     }
 }

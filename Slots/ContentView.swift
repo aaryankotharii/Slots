@@ -48,21 +48,21 @@ struct ContentView: View {
                 VStack{
                 HStack{
                       
-                      CardView(symbol: $symbols[num[0]], background: $background[num[0]])
-                      CardView(symbol: $symbols[num[1]], background: $background[num[1]])
-                      CardView(symbol: $symbols[num[2]], background: $background[num[2]])
+                      CardView(symbol: $symbols[num[0]], background: $background[0])
+                      CardView(symbol: $symbols[num[1]], background: $background[1])
+                      CardView(symbol: $symbols[num[2]], background: $background[2])
                   }
                 HStack{
                         
-                        CardView(symbol: $symbols[num[3]], background: $background[num[3]])
-                    CardView(symbol: $symbols[num[4]], background: $background[num[4]])
-                        CardView(symbol: $symbols[num[5]], background: $background[num[5]])
+                        CardView(symbol: $symbols[num[3]], background: $background[3])
+                    CardView(symbol: $symbols[num[4]], background: $background[4])
+                        CardView(symbol: $symbols[num[5]], background: $background[5])
                     }
                     HStack{
                           
-                          CardView(symbol: $symbols[num[6]], background: $background[num[6]])
-                          CardView(symbol: $symbols[num[7]], background: $background[num[7]])
-                          CardView(symbol: $symbols[num[8]], background: $background[num[8]])
+                          CardView(symbol: $symbols[num[6]], background: $background[6])
+                          CardView(symbol: $symbols[num[7]], background: $background[7])
+                          CardView(symbol: $symbols[num[8]], background: $background[8])
                       }
                 }
                 
@@ -110,6 +110,9 @@ struct ContentView: View {
     
     func processResult(_ isMax : Bool = false){
         
+        self.background = self.background.map({ _ in
+            Color.white
+        })
         if isMax {
         self.num = self.num.map({ _ in
             Int.random(in: 0...self.symbols.count-1)
@@ -120,7 +123,7 @@ struct ContentView: View {
             num[4] = Int.random(in: 0...self.symbols.count-1)
             num[5] = Int.random(in: 0...self.symbols.count-1)
         }
-        self.processWin(isMax)
+        processWin(isMax)
     }
     
     func processWin(_ isMax : Bool = false){
@@ -128,61 +131,16 @@ struct ContentView: View {
         
         if !isMax{
             //single spin
-            if self.num[3] == self.num[4] && self.num[4] == self.num[4] {
-                //self.credits += self.betAmount * 10
-                matches += 1
-                self.background[3] = Color.green
-                self.background[4] = Color.green
-                self.background[5] = Color.green
-            }
-            else{
-                //self.background = .white
-                self.credits -= self.betAmount
-            }
+            if isMatch(3,4,5){ matches+=1 }
         }
         else{
           // processign for maxSpin
-            if self.num[0] == self.num[1] && self.num[1] == self.num[2] {
-                //self.credits += self.betAmount * 10
-                matches += 1
-                self.background[0] = Color.green
-                self.background[1] = Color.green
-                self.background[2] = Color.green
-            
-        }
-        
-            if self.num[3] == self.num[4] && self.num[4] == self.num[4] {
-                //self.credits += self.betAmount * 10
-                matches += 1
-                self.background[3] = Color.green
-                self.background[4] = Color.green
-                self.background[5] = Color.yellow
 
-    }
-            
-            if self.num[6] == self.num[7] && self.num[7] == self.num[7] {
-                //self.credits += self.betAmount * 10
-                matches += 1
-                self.background[7] = Color.green
-                self.background[8] = Color.green
-                self.background[9] = Color.green
-}
-            if self.num[0] == self.num[4] && self.num[4] == self.num[8] {
-                //self.credits += self.betAmount * 10
-                matches += 1
-                self.background[0] = Color.green
-                self.background[4] = Color.green
-                self.background[8] = Color.green
-            }
-            
-            if self.num[2] == self.num[4] && self.num[6] == self.num[4] {
-                //self.credits += self.betAmount * 10
-                matches += 1
-                self.background[2] = Color.green
-                self.background[4] = Color.green
-                self.background[6] = Color.green
-                
-            }
+            if isMatch(0,1,2){ matches+=1 }
+            if isMatch(3,4,5){ matches+=1 }
+            if isMatch(6,7,8){ matches+=1 }
+            if isMatch(0,4,8){ matches+=1 }
+            if isMatch(2,4,6){ matches+=1 }
             
             if matches > 0{
                 // atleast 1 win
@@ -198,6 +156,17 @@ struct ContentView: View {
             }
             
         }
+    }
+    
+    func isMatch(_ index1 : Int, _ index2 : Int, _ index3 : Int) -> Bool{
+            if self.num[index1] == self.num[index2] && self.num[index2] == self.num[index3] {
+                print(index1,index2,index3)
+                self.background[index1] = Color.green
+                self.background[index2] = Color.green
+                self.background[index3] = Color.green
+                return true
+        }
+        return false
     }
 }
 struct ContentView_Previews: PreviewProvider {
