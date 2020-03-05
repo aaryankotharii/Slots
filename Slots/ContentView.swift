@@ -32,6 +32,12 @@ struct ContentView: View {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
                 }.scaleEffect(2)
+                
+                Text("Credits 1000")
+                    .foregroundColor(.black)
+                    .padding(.all,10)
+                    .background(Color.white.opacity(0.5))
+                .cornerRadius(20)
             }
         }
     }
