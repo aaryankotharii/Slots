@@ -67,22 +67,41 @@ struct ContentView: View {
                 }
                 
                 Spacer()
-                VStack {
-                   Button(action: {
-                    self.processResult()
-                        }){
-                            Text("Spin")
-                                .bold()
-                                .foregroundColor(.white)
-                                .padding(.all,10)
-                                .padding([.leading,.trailing],30)
-                                .background(Color.pink)
-                                .cornerRadius(20)
+                HStack(spacing: 20) {
+                    
+                    
+                    VStack {
+                       Button(action: {
+                        self.processResult()
+                            }){
+                                Text("Spin")
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .padding(.all,10)
+                                    .padding([.leading,.trailing],30)
+                                    .background(Color.pink)
+                                    .cornerRadius(20)
+                        }
+                        Text("\(betAmount) credits")
+                                .padding(.top,10)
+                                .font(.footnote)
                     }
-                    Text("5 credits")
-                            .foregroundColor(.white)
-                            .padding(.top,10)
-                            .font(.footnote)
+                VStack {
+                       Button(action: {
+                        self.processResult(true)
+                            }){
+                                Text("Max Spin")
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .padding(.all,10)
+                                    .padding([.leading,.trailing],30)
+                                    .background(Color.pink)
+                                    .cornerRadius(20)
+                        }
+                        Text("\(betAmount*5) credits")
+                                .padding(.top,10)
+                                .font(.footnote)
+                    }
                 }
                 Spacer()
             }
