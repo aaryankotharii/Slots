@@ -21,6 +21,18 @@ struct ContentView: View {
             .rotationEffect(Angle(degrees: 45))
             .edgesIgnoringSafeArea(.all)
 
+            VStack{
+                //Title
+                HStack{
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                    Text("SwiftUI Slots")
+                        .bold()
+                        .foregroundColor(.white)
+                    Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
+                }.scaleEffect(2)
+            }
         }
     }
 }
