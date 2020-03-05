@@ -67,36 +67,123 @@ struct ContentView: View {
                 }
                 
                 Spacer()
-                Button(action: {
-                    self.num = self.num.map({ _ in
-                        Int.random(in: 0...self.symbols.count-1)
-                    })
-                    //
-                    if self.num[0] == self.num[1] && self.num[1] == self.num[2] {
-                        self.credits += self.betAmount * 10
-                       // self.background = .green
+                VStack {
+                   Button(action: {
+                    self.processResult()
+                        }){
+                            Text("Spin")
+                                .bold()
+                                .foregroundColor(.white)
+                                .padding(.all,10)
+                                .padding([.leading,.trailing],30)
+                                .background(Color.pink)
+                                .cornerRadius(20)
                     }
-                    else{
-                        //self.background = .white
-                        self.credits -= self.betAmount
-                    }
-                    }){
-                        Text("Spin")
-                        .bold()
+                    Text("5 credits")
                             .foregroundColor(.white)
-                            .padding(.all,10)
-                            .padding([.leading,.trailing],30)
-                            .background(Color.pink)
-                            .cornerRadius(20)
+                            .padding(.top,10)
+                            .font(.footnote)
                 }
                 Spacer()
             }
         }
     }
-}
+    
+    func processResult(_ isMax : Bool = false){
+        
+        if isMax {
+        self.num = self.num.map({ _ in
+            Int.random(in: 0...self.symbols.count-1)
+        })
+        }
+        else{
+            num[3] = Int.random(in: 0...self.symbols.count-1)
+            num[4] = Int.random(in: 0...self.symbols.count-1)
+            num[5] = Int.random(in: 0...self.symbols.count-1)
+        }
+        self.processWin(isMax)
+    }
+    
+    func processWin(_ isMax : Bool = false){
+        var matches = 0
+        
+        if !isMax{
+            //single spin
+            if self.num[3] == self.num[4] && self.num[4] == self.num[4] {
+                //self.credits += self.betAmount * 10
+                matches += 1
+                self.background[3] = Color.green
+                self.background[4] = Color.green
+                self.background[5] = Color.green
+            }
+            else{
+                //self.background = .white
+                self.credits -= self.betAmount
+            }
+        }
+        else{
+          // processign for maxSpin
+            if self.num[0] == self.num[1] && self.num[1] == self.num[2] {
+                //self.credits += self.betAmount * 10
+                matches += 1
+                self.background[0] = Color.green
+                self.background[1] = Color.green
+                self.background[2] = Color.green
+            
+        }
+        
+            if self.num[3] == self.num[4] && self.num[4] == self.num[4] {
+                //self.credits += self.betAmount * 10
+                matches += 1
+                self.background[3] = Color.green
+                self.background[4] = Color.green
+                self.background[5] = Color.green
 
+    }
+            
+            if self.num[6] == self.num[7] && self.num[7] == self.num[7] {
+                //self.credits += self.betAmount * 10
+                matches += 1
+                self.background[7] = Color.green
+                self.background[8] = Color.green
+                self.background[9] = Color.green
+}
+            if self.num[0] == self.num[4] && self.num[4] == self.num[8] {
+                //self.credits += self.betAmount * 10
+                matches += 1
+                self.background[0] = Color.green
+                self.background[4] = Color.green
+                self.background[8] = Color.green
+            }
+            
+            if self.num[2] == self.num[4] && self.num[6] == self.num[4] {
+                //self.credits += self.betAmount * 10
+                matches += 1
+                self.background[2] = Color.green
+                self.background[4] = Color.green
+                self.background[6] = Color.green
+                
+            }
+            
+            if matches > 0{
+                // atleast 1 win
+                self.credits += matches * betAmount * 2
+            }
+            else if !isMax {
+                //0 wins single spin
+                self.credits -= betAmount
+            }
+            else{
+                //0 wins max spin
+                self.credits -= betAmount * 5
+            }
+            
+        }
+    }
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
